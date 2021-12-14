@@ -132,7 +132,11 @@ public class UI {
         switch (choice) {
 
             case 1:
+                System.out.print("student id:");
+                int id = sc.nextInt();
+                sc.nextLine();
 
+                StudentManager.printStudentById(id);
                 break;
 
             case 2:
