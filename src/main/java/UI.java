@@ -1,8 +1,6 @@
 import management.StudentManager;
 import management.courseManagement;
 
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.util.Scanner;
 
 public class UI {
@@ -184,6 +182,24 @@ public class UI {
                 sc.nextLine();
                 courseManagement.printCourse(id);
                 break;
+
+            case 2:
+                courseManagement.printAllCourses();
+                break;
+
+            case 3:
+                System.out.println("Name of new Course:");
+                String name = sc.nextLine();
+                courseManagement.addCourse(name);
+
+            case 4:
+                System.out.println("Id of Course?");
+                int idToChange = sc.nextInt();
+                sc.nextLine();
+                System.out.println("New name of Course?");
+                String newName = sc.nextLine();
+                courseManagement.updateCourse(newName, idToChange);
+
 
             case 0:
                 courseMenuLoop = false;
