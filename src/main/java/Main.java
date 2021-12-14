@@ -13,29 +13,32 @@ public class Main {
 
     public static void main(String[] args) {
 
-UI.menuLoop();
-
-    }
-}
-        /*
+//UI.menuLoop();
 
         EntityManager em = emf.createEntityManager();
 
-
+/*
         Student a = new Student("banana joe", "Male", 22);
         Course b = new Course("Math 1");
         Teacher c = new Teacher("Banana Sue", 46, "Female", 4206969);
         Department d = new Department("Science");
+*/
 
+/*
         em.getTransaction().begin();
+        Student student = em.find(Student.class, 2);
+        Course course = em.find(Course.class, 1);
+        student.addCourse(course);
 
-        em.persist(b);
-        em.persist(a);
-        em.persist(c);
-        em.persist(d);
         em.getTransaction().commit();
         em.close();
 */
+    }
+}
+
+
+
+
 
 
 

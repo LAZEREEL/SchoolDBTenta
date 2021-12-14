@@ -23,18 +23,18 @@ public class UI {
         switch (choice) {
 
             case 1:
-
+                studentMenu();
                 break;
 
             case 2:
-
+                courseMenu();
                 break;
             case 3:
-
+                teacherMenu();
                 break;
 
             case 4:
-
+                departmentMenu();
                 break;
 
             case 5:
