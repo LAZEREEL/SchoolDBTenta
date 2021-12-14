@@ -11,11 +11,14 @@ public class Student {
     @Id
     @GeneratedValue
     private int id;
+
     private String name;
     private String gender;
     private int age;
+
     @ManyToMany
     private List<Course> courses;
+
     public Student() {
     }
 

@@ -1,3 +1,6 @@
+import management.StudentManager;
+import management.courseManagement;
+
 import java.util.Scanner;
 
 public class UI {
@@ -81,7 +84,7 @@ public class UI {
 
             case 0:
                 mainMenuLoop = false;
-                Main.emf.close();
+
                 break;
 
             default:
@@ -127,12 +130,42 @@ public class UI {
         switch (choice) {
 
             case 1:
+                System.out.print("student id:");
+                int id = sc.nextInt();
+                sc.nextLine();
+
+                StudentManager.printStudentById(id);
+                break;
+
+            case 2:
+
+                break;
+
+            case 3:
+                System.out.print("name:");
+                String name = sc.nextLine();
+
+                System.out.print("gender:");
+                String gender = sc.nextLine();
+
+                System.out.print("age:");
+                int age = sc.nextInt();
+                sc.nextLine();
+
+                StudentManager.createStudent(name,gender,age);
+                break;
+
+            case 4:
+
+                break;
+
+            case 5:
 
                 break;
 
             case 0:
                 studentMenuLoop = false;
-                Main.emf.close();
+
                 break;
 
             default:
@@ -164,12 +197,33 @@ public class UI {
         switch (choice) {
 
             case 1:
-
+                System.out.println("Id of Course:");
+                int id = sc.nextInt();
+                sc.nextLine();
+                courseManagement.printCourse(id);
                 break;
+
+            case 2:
+                courseManagement.printAllCourses();
+                break;
+
+            case 3:
+                System.out.println("Name of new Course:");
+                String name = sc.nextLine();
+                courseManagement.addCourse(name);
+
+            case 4:
+                System.out.println("Id of Course?");
+                int idToChange = sc.nextInt();
+                sc.nextLine();
+                System.out.println("New name of Course?");
+                String newName = sc.nextLine();
+                courseManagement.updateCourse(newName, idToChange);
+
 
             case 0:
                 courseMenuLoop = false;
-                Main.emf.close();
+
                 break;
 
             default:
@@ -251,7 +305,7 @@ public class UI {
             break;
             case 0:
                 teacherMenuLoop = false;
-                Main.emf.close();
+
                 break;
 
             default:
@@ -321,7 +375,7 @@ public class UI {
 
             case 0:
                 departmentMenuLoop = false;
-                Main.emf.close();
+
                 break;
 
             default:
