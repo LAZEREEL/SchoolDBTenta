@@ -3,11 +3,16 @@ import java.util.Scanner;
 public class UI {
 
     static Scanner sc = new Scanner(System.in);
-    static boolean loop = true;
+    static boolean mainMenuLoop = true;
+    static boolean studentMenuLoop = true;
+    static boolean courseMenuLoop = true;
+    static boolean teacherMenuLoop = true;
+    static boolean departmentMenuLoop = true;
+    static boolean statisticsMenuLoop = true;
 
     public static void menuLoop() {
 
-        while (loop) {
+        while (mainMenuLoop) {
             mainMenu();
 
             System.out.print("\nMake your choice:");
@@ -23,46 +28,59 @@ public class UI {
         switch (choice) {
 
             case 1:
-                studentMenu();
+                while (studentMenuLoop) {
+                    studentMenuUI();
+
+                    System.out.print("\nMake your choice:");
+                    int a = sc.nextInt();
+                    sc.nextLine();
+
+                    studentMenu(a);
+                }
                 break;
 
             case 2:
-                courseMenu();
+                while (courseMenuLoop) {
+                    courseMenuUI();
+
+                    System.out.print("\nMake your choice:");
+                    int a = sc.nextInt();
+                    sc.nextLine();
+
+                    courseMenu(a);
+                }
                 break;
             case 3:
-                teacherMenu();
+                while (teacherMenuLoop) {
+                    teacherMenu();
+
+                    System.out.print("\nMake your choice:");
+                    int a = sc.nextInt();
+                    sc.nextLine();
+
+                    teacherMenu(a);
+                }
                 break;
 
             case 4:
-                departmentMenu();
+                while (departmentMenuLoop) {
+                    departmentMenu();
+
+                    System.out.print("\nMake your choice:");
+                    int a = sc.nextInt();
+                    sc.nextLine();
+
+                    departmentMenu(a);
+                }
                 break;
 
             case 5:
-
-
-                break;
-
-            case 6:
-
-
-                break;
-
-            case 7:
-
-                break;
-
-            case 8:
-
-                break;
-
-            case 9:
 
                 break;
 
 
             case 0:
-                loop = false;
-                sc.close();
+                mainMenuLoop = false;
                 Main.emf.close();
                 break;
 
@@ -87,7 +105,7 @@ public class UI {
 
     }
 
-    public static void studentMenu() {
+    public static void studentMenuUI() {
         System.out.println("\n=================================");
         System.out.println("          Student Menu               ");
         System.out.println("=================================");
@@ -104,7 +122,25 @@ public class UI {
 
     }
 
-    public static void courseMenu() {
+    public static void studentMenu(int choice) {
+
+        switch (choice) {
+
+            case 1:
+
+                break;
+
+            case 0:
+                studentMenuLoop = false;
+                Main.emf.close();
+                break;
+
+            default:
+                System.out.println("No such choice. Try again!");
+        }
+    }
+
+    public static void courseMenuUI() {
         System.out.println("\n=================================");
         System.out.println("           Course Menu               ");
         System.out.println("=================================");
@@ -121,6 +157,24 @@ public class UI {
         System.out.println("\n0.Exit");
         System.out.println("=================================");
 
+    }
+
+    public static void courseMenu(int choice) {
+
+        switch (choice) {
+
+            case 1:
+
+                break;
+
+            case 0:
+                courseMenuLoop = false;
+                Main.emf.close();
+                break;
+
+            default:
+                System.out.println("No such choice. Try again!");
+        }
     }
 
     public static void teacherMenu() {
@@ -142,6 +196,24 @@ public class UI {
 
     }
 
+    public static void teacherMenu(int choice) {
+
+        switch (choice) {
+
+            case 1:
+
+                break;
+
+            case 0:
+                teacherMenuLoop = false;
+                Main.emf.close();
+                break;
+
+            default:
+                System.out.println("No such choice. Try again!");
+        }
+    }
+
     public static void departmentMenu() {
         System.out.println("\n=================================");
         System.out.println("           Department Menu               ");
@@ -159,6 +231,24 @@ public class UI {
         System.out.println("\n0.Exit");
         System.out.println("=================================");
 
+    }
+
+    public static void departmentMenu(int choice) {
+
+        switch (choice) {
+
+            case 1:
+
+                break;
+
+            case 0:
+                departmentMenuLoop = false;
+                Main.emf.close();
+                break;
+
+            default:
+                System.out.println("No such choice. Try again!");
+        }
     }
 
     public static void statisticsMenu() {

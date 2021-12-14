@@ -13,9 +13,9 @@ public class Main {
 
     public static void main(String[] args) {
 
-//UI.menuLoop();
+        UI.menuLoop();
 
-        EntityManager em = emf.createEntityManager();
+       // EntityManager em = emf.createEntityManager();
 
 /*
         Student a = new Student("banana joe", "Male", 22);
