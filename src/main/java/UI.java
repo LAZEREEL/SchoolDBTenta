@@ -140,7 +140,7 @@ public class UI {
                 break;
 
             case 2:
-
+                StudentManager.printAllStudents();
                 break;
 
             case 3:
@@ -158,10 +158,22 @@ public class UI {
                 break;
 
             case 4:
+                System.out.print("id of the student you wish to update:");
+                id = sc.nextInt();
+                sc.nextLine();
 
+                StudentManager.updateStudentMenu(id);
                 break;
 
             case 5:
+
+                break;
+
+            case 6:
+
+                break;
+
+            case 7:
 
                 break;
 
