@@ -13,6 +13,12 @@ public class Main {
 
     public static void main(String[] args) {
 
+UI.menuLoop();
+
+    }
+}
+        /*
+
         EntityManager em = emf.createEntityManager();
 
 
@@ -22,13 +28,15 @@ public class Main {
         Department d = new Department("Science");
 
         em.getTransaction().begin();
+
         em.persist(b);
         em.persist(a);
         em.persist(c);
         em.persist(d);
         em.getTransaction().commit();
         em.close();
+*/
 
-    }
 
-}
+
+
