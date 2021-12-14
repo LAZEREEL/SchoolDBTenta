@@ -130,6 +130,18 @@ public class UI {
         switch (choice) {
 
             case 1:
+                System.out.print("student id:");
+                int id = sc.nextInt();
+                sc.nextLine();
+
+                StudentManager.printStudentById(id);
+                break;
+
+            case 2:
+
+                break;
+
+            case 3:
                 System.out.print("name:");
                 String name = sc.nextLine();
 
@@ -141,6 +153,14 @@ public class UI {
                 sc.nextLine();
 
                 StudentManager.createStudent(name,gender,age);
+                break;
+
+            case 4:
+
+                break;
+
+            case 5:
+
                 break;
 
             case 0:

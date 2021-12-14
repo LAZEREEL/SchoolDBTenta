@@ -30,4 +30,15 @@ public class StudentManager {
 
         em.close();
     }
+
+    public static void printStudentById(int id) {
+        EntityManager em = emf.createEntityManager();
+
+        Student student = em.find(Student.class, id);
+
+        System.out.println("Here you have the following information about the student:");
+        System.out.println(student);
+
+        em.close();
+    }
 }
