@@ -1,3 +1,5 @@
+import Entity.StudentManager;
+
 import java.util.Scanner;
 
 public class UI {
@@ -127,7 +129,17 @@ public class UI {
         switch (choice) {
 
             case 1:
+                System.out.print("name:");
+                String name = sc.nextLine();
 
+                System.out.print("gender:");
+                String gender = sc.nextLine();
+
+                System.out.print("age:");
+                int age = sc.nextInt();
+                sc.nextLine();
+
+                StudentManager.createStudent(name,gender,age);
                 break;
 
             case 0:
