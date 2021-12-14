@@ -19,14 +19,6 @@ public class Main {
 
 
 
-/*
-        Student a = new Student("banana joe", "Male", 22);
-        Course b = new Course("Math 1");
-        Teacher c = new Teacher("Banana Sue", 46, "Female", 4206969);
-        Department d = new Department("Science");
-*/
-
-
 
 
     }
