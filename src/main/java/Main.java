@@ -13,9 +13,11 @@ public class Main {
 
     public static void main(String[] args) {
 
+        EntityManager em = emf.createEntityManager();
+
         UI.menuLoop();
 
-       // EntityManager em = emf.createEntityManager();
+
 
 /*
         Student a = new Student("banana joe", "Male", 22);
@@ -24,15 +26,9 @@ public class Main {
         Department d = new Department("Science");
 */
 
-/*
-        em.getTransaction().begin();
-        Student student = em.find(Student.class, 2);
-        Course course = em.find(Course.class, 1);
-        student.addCourse(course);
 
-        em.getTransaction().commit();
-        em.close();
-*/
+
+
     }
 }
 

@@ -164,7 +164,10 @@ public class UI {
         switch (choice) {
 
             case 1:
-
+                System.out.println("Id of Course:");
+                int id = sc.nextInt();
+                sc.nextLine();
+                courseManagement.printCourse(id);
                 break;
 
             case 0:
