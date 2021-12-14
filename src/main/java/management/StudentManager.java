@@ -1,4 +1,6 @@
-package Entity;
+package management;
+
+import Entity.Student;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

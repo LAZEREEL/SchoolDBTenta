@@ -1,5 +1,8 @@
-import Entity.StudentManager;
+import management.StudentManager;
+import management.courseManagement;
 
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import java.util.Scanner;
 
 public class UI {
@@ -83,7 +86,7 @@ public class UI {
 
             case 0:
                 mainMenuLoop = false;
-                Main.emf.close();
+
                 break;
 
             default:
@@ -144,7 +147,7 @@ public class UI {
 
             case 0:
                 studentMenuLoop = false;
-                Main.emf.close();
+
                 break;
 
             default:
@@ -184,7 +187,7 @@ public class UI {
 
             case 0:
                 courseMenuLoop = false;
-                Main.emf.close();
+
                 break;
 
             default:
@@ -221,7 +224,7 @@ public class UI {
 
             case 0:
                 teacherMenuLoop = false;
-                Main.emf.close();
+
                 break;
 
             default:
@@ -258,7 +261,7 @@ public class UI {
 
             case 0:
                 departmentMenuLoop = false;
-                Main.emf.close();
+
                 break;
 
             default:
