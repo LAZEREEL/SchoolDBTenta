@@ -1,8 +1,6 @@
 import management.StudentManager;
 import management.courseManagement;
 
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.util.Scanner;
 
 public class UI {
@@ -217,6 +215,24 @@ public class UI {
                 courseManagement.printCourse(id);
                 break;
 
+            case 2:
+                courseManagement.printAllCourses();
+                break;
+
+            case 3:
+                System.out.println("Name of new Course:");
+                String name = sc.nextLine();
+                courseManagement.addCourse(name);
+
+            case 4:
+                System.out.println("Id of Course?");
+                int idToChange = sc.nextInt();
+                sc.nextLine();
+                System.out.println("New name of Course?");
+                String newName = sc.nextLine();
+                courseManagement.updateCourse(newName, idToChange);
+
+
             case 0:
                 courseMenuLoop = false;
 
@@ -246,14 +262,59 @@ public class UI {
 
     }
 
+    public static void printTeacherMenu() {
+
+        System.out.println("1.Print Teacher by id");
+        System.out.println("2.Print Teacher and course");
+        System.out.println("3.Print Teacher and department");
+
+        int printChoice = sc.nextInt();
+        sc.nextLine();
+
+        switch (printChoice) {
+
+            case 1:
+                TeacherManagement.printTeacherById();
+                break;
+
+            case 2:
+                TeacherManagement.printTeacherAndCourse();
+                break;
+
+            case 3:
+                TeacherManagement.printTeacherAndDepartment();
+                break;
+        }
+
+    }
+
     public static void teacherMenu(int choice) {
 
         switch (choice) {
 
             case 1:
-
+                printTeacherMenu();
                 break;
 
+
+            case 2:
+                TeacherManagement.printAllTeachers();
+                break;
+
+            case 3:
+                TeacherManagement.addTeacher();
+                break;
+
+            case 4:
+                updateTeacherMenu();
+                break;
+
+            case 5 :
+                TeacherManagement.removeTeacher();
+                break;
+
+            case 6 : TeacherManagement.connectTeacherToCourse();
+            break;
             case 0:
                 teacherMenuLoop = false;
 
@@ -263,6 +324,39 @@ public class UI {
                 System.out.println("No such choice. Try again!");
         }
     }
+
+    private static void updateTeacherMenu() {
+
+        System.out.println("1. Update all fields");
+        System.out.println("2. Update name");
+        System.out.println("3. Update age");
+        System.out.println("4. Update gender");
+        System.out.println("5. Update salary");
+
+        int choice = sc.nextInt();
+        sc.nextLine();
+
+        switch (choice) {
+
+            case 1:
+                TeacherManagement.updateAllFields();
+                break;
+            case 2:
+                TeacherManagement.updateName();
+                break;
+            case 3:
+                TeacherManagement.updateAge();
+                break;
+            case 4:
+                TeacherManagement.updateGender();
+                break;
+            case 5:
+                TeacherManagement.updateSalary();
+                break;
+
+        }
+    }
+
 
     public static void departmentMenu() {
         System.out.println("\n=================================");
