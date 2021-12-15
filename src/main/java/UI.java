@@ -168,11 +168,25 @@ public class UI {
                 break;
 
             case 6:
+                System.out.print("id of student:");
+                id = sc.nextInt();
 
+                System.out.print("id of course:");
+                int courseid = sc.nextInt();
+                sc.nextLine();
+
+                CourseManagement.addStudentToCourse(id, courseid);
                 break;
 
             case 7:
+                System.out.print("id of student:");
+                id = sc.nextInt();
 
+                System.out.print("id of course:");
+                courseid = sc.nextInt();
+                sc.nextLine();
+
+                CourseManagement.removeStudentFromCourse(id, courseid);
                 break;
 
             case 0:
