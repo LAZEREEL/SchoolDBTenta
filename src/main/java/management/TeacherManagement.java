@@ -15,9 +15,6 @@ public class TeacherManagement {
     static EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU");
 
 
-
-
-
     public static void disconnectTeacherFromDepartment() {
 
         EntityManager em = emf.createEntityManager();
