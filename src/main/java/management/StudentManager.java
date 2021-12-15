@@ -10,7 +10,6 @@ import java.util.Scanner;
 
 public class StudentManager {
     static EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU");
-    static boolean loop = true;
     static Scanner sc = new Scanner(System.in);
 
     public static void createStudent(String name, String gender, int age){
@@ -54,6 +53,8 @@ public class StudentManager {
     }
 
     public static void updateStudentMenu(int id) {
+        boolean loop = true;
+
         while (loop){
             System.out.println("=====================");
             System.out.println("Update Student Menu");
