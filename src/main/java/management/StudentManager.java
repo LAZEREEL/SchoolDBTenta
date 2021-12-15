@@ -13,10 +13,6 @@ public class StudentManager {
     static boolean loop = true;
     static Scanner sc = new Scanner(System.in);
 
-    public static void main(String[] args) {
-        createStudent("Dennis","man",24);
-    }
-
     public static void createStudent(String name, String gender, int age){
         Student student = new Student(name,gender,age);
 
