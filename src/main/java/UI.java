@@ -167,7 +167,7 @@ public class UI {
                 break;
 
             case 2:
-
+                StudentManager.printAllStudents();
                 break;
 
             case 3:
@@ -185,7 +185,11 @@ public class UI {
                 break;
 
             case 4:
+                System.out.print("Id of student:");
+                id = sc.nextInt();
+                sc.nextLine();
 
+                StudentManager.updateStudentMenu(id);
                 break;
 
             case 5:
