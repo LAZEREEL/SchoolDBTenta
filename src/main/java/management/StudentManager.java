@@ -196,16 +196,100 @@ public class StudentManager {
     }
 
     public static void studentStatistics() {
+        
+        printNumberOfStudents();
+    }
+
+    private static void printNumberOfStudents() {
         EntityManager em = emf.createEntityManager();
 
         List<Student> students = em.createNativeQuery("SELECT * FROM Student").getResultList();
 
-        System.out.println("The total number of students is " + students.size());
+        int numberOfStudents = students.size();
 
+        System.out.println("The total number of students is " + numberOfStudents);
+        
+        em.close();
+        
+        printAvgAge();
 
-        double avgAge = (double) em.createNativeQuery("SELECT AVG(age) FROM Student").getSingleResult();
+        printGenderDistrubtion(numberOfStudents);
+    }
 
-        System.out.println("The avg for all students is " + avgAge);
+    private static void printAvgAge() {
+        EntityManager em = emf.createEntityManager();
+
+        double avgAge = (double) em.createQuery("SELECT AVG(s.age) FROM Student s").getSingleResult();
+
+        System.out.println("The avg age for all students is " + avgAge);
+        
+        em.close();
+        
+        printMaxAge();
+    }
+
+    private static void printMaxAge() {
+        EntityManager em = emf.createEntityManager();
+
+        int maxAge = (int) em.createQuery("SELECT MAX(s.age) FROM Student s").getSingleResult();
+
+        System.out.println("The oldest student is " + maxAge + " years old.");
+        
+        em.close();
+        
+        printMinAge();
+    }
+
+    private static void printMinAge() {
+        EntityManager em = emf.createEntityManager();
+
+        int minAge = (int) em.createQuery("SELECT MIN(s.age) FROM Student s").getSingleResult();
+
+        System.out.println("The youngest student is " + minAge + " years old.");
+        
+        em.close();
+    }
+
+    private static void printGenderDistrubtion(int numberOfStudents) {
+        EntityManager em = emf.createEntityManager();
+
+        List<Student> women = em.createQuery("SELECT s FROM Student s WHERE s.gender=:gender").setParameter("gender","woman").getResultList();
+
+        int numberOfWomen = women.size();
+
+        double percentOfWomen = (double) 100 * numberOfWomen/numberOfStudents;
+
+        List<Student> men = em.createQuery("SELECT s FROM Student s WHERE s.gender=:gender").setParameter("gender","man").getResultList();
+
+        int numberOfMen = men.size();
+
+        double percentOfMen = (double) 100 * numberOfMen/numberOfStudents;
+
+        System.out.println("The gender distrubtion is " + percentOfWomen + "% of women and " + percentOfMen + "% of men");
+
+        em.close();
+
+        printAvgAgeWomen();
+    }
+
+    private static void printAvgAgeWomen() {
+        EntityManager em = emf.createEntityManager();
+
+        double womenAvgAge = (double) em.createQuery("SELECT AVG(s.age) FROM Student s WHERE s.gender=:gender").setParameter("gender","woman").getSingleResult();
+
+        System.out.println("The avg age for women is " + womenAvgAge);
+
+        em.close();
+
+        printAvgAgeMen();
+    }
+
+    private static void printAvgAgeMen() {
+        EntityManager em = emf.createEntityManager();
+
+        double menAvgAge = (double) em.createQuery("SELECT AVG(s.age) FROM Student s WHERE s.gender=:gender").setParameter("gender","man").getSingleResult();
+
+        System.out.println("The avg age for men is " + menAvgAge);
 
         em.close();
     }
