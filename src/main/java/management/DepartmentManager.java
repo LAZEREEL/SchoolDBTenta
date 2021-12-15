@@ -1,4 +1,4 @@
-package Entity;
+package management;
 import Entity.Department;
 import javax.persistence.*;
 import java.util.Comparator;
@@ -40,8 +40,8 @@ public class DepartmentManager {
         System.out.println("Enter Department Id");
         int depId = sc.nextInt();
         sc.nextLine();
-        Department department = em.find(Department.class, id);
-        department.setId(id);
+        Department department = em.find(Department.class, depId);
+        department.setId(depId);
         em.getTransaction().begin();
         em.remove(department);
         em.getTransaction().commit();

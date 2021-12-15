@@ -1,6 +1,6 @@
 import Entity.Teacher;
-import management.CourseManagement;
 import management.StudentManager;
+import management.CourseManagement;
 import management.TeacherManagement;
 
 import java.util.Scanner;
@@ -16,6 +16,8 @@ public class UI {
     static boolean statisticsMenuLoop = true;
 
     public static void menuLoop() {
+
+        mainMenuLoop = true;
 
         while (mainMenuLoop) {
             mainMenu();
@@ -33,6 +35,9 @@ public class UI {
         switch (choice) {
 
             case 1:
+
+                studentMenuLoop = true;
+
                 while (studentMenuLoop) {
                     studentMenuUI();
 
@@ -45,6 +50,9 @@ public class UI {
                 break;
 
             case 2:
+
+                courseMenuLoop = true;
+
                 while (courseMenuLoop) {
                     courseMenuUI();
 
@@ -55,7 +63,11 @@ public class UI {
                     courseMenu(a);
                 }
                 break;
+
             case 3:
+
+                teacherMenuLoop = true;
+
                 while (teacherMenuLoop) {
                     teacherMenu();
 
@@ -68,6 +80,9 @@ public class UI {
                 break;
 
             case 4:
+
+                departmentMenuLoop = true;
+
                 while (departmentMenuLoop) {
                     departmentMenu();
 
@@ -81,6 +96,16 @@ public class UI {
 
             case 5:
 
+                statisticsMenuLoop = true;
+
+                while (statisticsMenuLoop){
+                    statisticsMenu();
+
+                    System.out.print("\nMake your choice:");
+                    int a = sc.nextInt();
+                    sc.nextLine();
+
+                }
                 break;
 
 
@@ -128,6 +153,8 @@ public class UI {
     }
 
     public static void studentMenu(int choice) {
+
+
 
         switch (choice) {
 
@@ -189,6 +216,7 @@ public class UI {
 
             case 0:
                 studentMenuLoop = false;
+
                 break;
 
             default:
@@ -234,6 +262,7 @@ public class UI {
                 System.out.println("Name of new Course:");
                 String name = sc.nextLine();
                 CourseManagement.addCourse(name);
+                break;
 
             case 4:
                 System.out.println("Id of Course?");
@@ -242,7 +271,52 @@ public class UI {
                 System.out.println("New name of Course?");
                 String newName = sc.nextLine();
                 CourseManagement.updateCourse(newName, idToChange);
+                break;
 
+            case 5:
+                System.out.println("Id of Course?");
+                int idToRemove = sc.nextInt();
+                sc.nextLine();
+                CourseManagement.removeCourse(idToRemove);
+                break;
+
+            case 6:
+                System.out.println("Id of Student to add to Course?");
+                int addStudent = sc.nextInt();
+                sc.nextLine();
+                System.out.println("Id of Course to add Student to?");
+                int addToCourse = sc.nextInt();
+                sc.nextLine();
+                CourseManagement.addStudentToCourse(addStudent, addToCourse);
+                break;
+
+            case 7:
+                System.out.println("Id of Student to remove from Course?");
+                int removeStudent = sc.nextInt();
+                sc.nextLine();
+                System.out.println("Id of Course to remove Student from?");
+                int removeStudentFromCourse = sc.nextInt();
+                sc.nextLine();
+                CourseManagement.removeStudentFromCourse(removeStudent, removeStudentFromCourse);
+                break;
+
+            case 8:
+                System.out.println("Id of Teacher to add to Course?");
+                int addTeacher = sc.nextInt();
+                sc.nextLine();
+                System.out.println("Id of Course to add Teacher to?");
+                int addTeacherToCourse = sc.nextInt();
+                sc.nextLine();
+                CourseManagement.addTeacherToCourse(addTeacher, addTeacherToCourse);
+                break;
+
+            case 9:
+
+                System.out.println("Id of Course to remove Teacher from?");
+                int removeTeacherFromCourse = sc.nextInt();
+                sc.nextLine();
+                CourseManagement.removeTeacherFromCourse(removeTeacherFromCourse);
+                break;
 
             case 0:
                 courseMenuLoop = false;
@@ -273,8 +347,6 @@ public class UI {
         System.out.println("=================================");
 
     }
-
-
 
     public static void teacherMenu(int choice) {
 
@@ -394,6 +466,22 @@ public class UI {
     }
 
     public static void statisticsMenu() {
+
+        System.out.println("\n=================================");
+        System.out.println("         Statistics Menu               ");
+        System.out.println("=================================");
+        System.out.println("1.Print Department");
+        System.out.println("2.Print all Departments");
+        System.out.println("3.Add Department");
+        System.out.println("4.Update Department");
+        System.out.println("5.Remove Department");
+        System.out.println("6.Connect Course to Department");
+        System.out.println("7.Disconnect Course from Department");
+        System.out.println("8.Connect Teacher to Department");
+        System.out.println("9.Disconnect Teacher from Department");
+
+        System.out.println("\n0.Exit");
+        System.out.println("=================================");
 
     }
 

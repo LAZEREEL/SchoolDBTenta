@@ -50,6 +50,7 @@ public class CourseManagement {
         Course newCourse = new Course(name);
 
         em.getTransaction().begin();
+
         em.persist(newCourse);
         em.getTransaction().commit();
         em.close();
@@ -64,7 +65,6 @@ public class CourseManagement {
 
         updateCourse.setName(newName);
 
-        em.refresh(updateCourse);
         em.getTransaction().commit();
         em.close();
     }
@@ -75,6 +75,10 @@ public class CourseManagement {
         Course courseToRemove = em.find(Course.class, id);
 
         em.getTransaction().begin();
+
+        courseToRemove.setTeacher(null);
+        courseToRemove.setStudents(null);
+
         em.remove(courseToRemove);
         em.getTransaction().commit();
         em.close();
