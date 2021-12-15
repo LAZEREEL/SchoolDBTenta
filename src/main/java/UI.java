@@ -3,6 +3,7 @@ import management.StudentManager;
 import management.CourseManagement;
 import management.TeacherManagement;
 
+
 import java.util.Scanner;
 
 public class UI {
@@ -14,6 +15,7 @@ public class UI {
     static boolean teacherMenuLoop = true;
     static boolean departmentMenuLoop = true;
     static boolean statisticsMenuLoop = true;
+    static boolean courseStatisticsMenuLoop = true;
 
     public static void menuLoop() {
 
@@ -98,7 +100,7 @@ public class UI {
 
                 statisticsMenuLoop = true;
 
-                while (statisticsMenuLoop){
+                while (statisticsMenuLoop) {
                     statisticsMenuUi();
 
                     System.out.print("\nMake your choice:");
@@ -182,7 +184,7 @@ public class UI {
                 int age = sc.nextInt();
                 sc.nextLine();
 
-                StudentManager.createStudent(name,gender,age);
+                StudentManager.createStudent(name, gender, age);
                 break;
 
             case 4:
@@ -433,8 +435,6 @@ public class UI {
     }
 
 
-
-
     public static void departmentMenuUi() {
         System.out.println("\n=================================");
         System.out.println("           Department Menu               ");
@@ -487,7 +487,10 @@ public class UI {
 
     }
 
-    public static void statisticsMenu(int choice){
+
+    public static void statisticsMenu(int choice) {
+
+        statisticsMenuLoop = true;
 
         switch (choice) {
 
@@ -497,10 +500,19 @@ public class UI {
 
             case 2:
                 //teacherStatistics();
+                break;
+
             case 3:
-                //courseStatistics();
+                courseStatisticsMenuLoop = true;
+
+                courseStatisticsMenuLoop();
+
+                break;
+
             case 4:
                 //departmentStatistics();
+                break;
+
 
             case 0:
                 statisticsMenuLoop = false;
@@ -512,4 +524,49 @@ public class UI {
         }
     }
 
+    public static void courseStatisticsUi() {
+
+
+        System.out.println("\n=======================================");
+        System.out.println("           Course Statistics             ");
+        System.out.println("=========================================");
+        System.out.println("1.Display all courses");
+        System.out.println("2.Display statistics for specific course");
+
+        System.out.println("\n0.Exit");
+        System.out.println("=================================");
+
+    }
+
+    public static void courseStatisticsMenuLoop() {
+
+            courseStatisticsMenuLoop = true;
+
+        while (courseStatisticsMenuLoop) {
+            courseStatisticsUi();
+
+            System.out.print("\nMake your choice:");
+            int choice = sc.nextInt();
+            sc.nextLine();
+
+            courseStatisticsMenu(choice);
+        }
+    }
+
+    public static void courseStatisticsMenu(int choice) {
+        switch (choice) {
+
+            case 1:
+                management.CourseManagement.displayAllCourses();
+                break;
+
+            case 2:
+                management.CourseManagement.displaySpecificCourse();
+                break;
+
+            case 0:
+                courseStatisticsMenuLoop = false;
+                break;
+        }
+    }
 }
