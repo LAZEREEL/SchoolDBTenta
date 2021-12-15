@@ -495,7 +495,7 @@ public class UI {
         switch (choice) {
 
             case 1:
-                //studentStatistics();
+                StudentManager.studentStatistics();
                 break;
 
             case 2:

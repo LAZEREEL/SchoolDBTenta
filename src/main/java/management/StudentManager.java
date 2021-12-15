@@ -194,4 +194,19 @@ public class StudentManager {
 
         em.close();
     }
+
+    public static void studentStatistics() {
+        EntityManager em = emf.createEntityManager();
+
+        List<Student> students = em.createNativeQuery("SELECT * FROM Student").getResultList();
+
+        System.out.println("The total number of students is " + students.size());
+
+
+        double avgAge = (double) em.createNativeQuery("SELECT AVG(age) FROM Student").getSingleResult();
+
+        System.out.println("The avg for all students is " + avgAge);
+
+        em.close();
+    }
 }
