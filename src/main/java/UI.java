@@ -224,7 +224,6 @@ public class UI {
 
             case 0:
                 studentMenuLoop = false;
-
                 break;
 
             default:

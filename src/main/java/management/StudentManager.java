@@ -179,18 +179,19 @@ public class StudentManager {
         em.close();
     }
 
-    public static void removeStudent(int id){
+    public static void removeStudent(int id) {
         EntityManager em = emf.createEntityManager();
 
-        Student StudentToRemove = em.find(Student.class, id);
+        Student student = em.find(Student.class, id);
 
         em.getTransaction().begin();
 
-        StudentToRemove.setCourses(null);
+        student.setCourses(null);
 
-        em.remove(StudentToRemove);
+        em.remove(student);
+
         em.getTransaction().commit();
-        em.close();
 
+        em.close();
     }
 }
