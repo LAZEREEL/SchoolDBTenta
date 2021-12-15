@@ -30,15 +30,16 @@ public class Department {
         this.depName = depName;
     }
 
-    @OneToMany
-    private List<Course> courseList = new ArrayList<>();
-    public List<Course> getCourseList() {
-        return courseList;
-    }
-    public void setCourseList(List<Course> courseList) {
-        this.courseList = courseList;
+    @ManyToOne
+    private Course course;
+
+    public Course getCourse() {
+        return course;
     }
 
+    public void setCourse(Course course) {
+        this.course = course;
+    }
 
     @OneToMany (mappedBy="department", cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Teacher> teacherList = new ArrayList<>();
@@ -48,6 +49,15 @@ public class Department {
     public void setTeacherList(List<Teacher> teacherList) {
         this.teacherList = teacherList;
     }
+
+
+
+
+
+
+
+
+
 
     public Department() {
     }
