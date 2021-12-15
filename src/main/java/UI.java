@@ -191,11 +191,11 @@ public class UI {
 
             case 0:
                 studentMenuLoop = false;
-
                 break;
 
             default:
                 System.out.println("No such choice. Try again!");
+                break;
         }
     }
 

@@ -112,6 +112,7 @@ public class StudentManager {
 
                 default:
                     System.out.println("There's no such option, try again");
+                    break;
             }
         }
     }
