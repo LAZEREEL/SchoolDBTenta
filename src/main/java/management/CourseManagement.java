@@ -1,6 +1,7 @@
 package management;
 
 import Entity.Course;
+import Entity.Student;
 import Entity.Teacher;
 
 import javax.persistence.EntityManager;
@@ -8,7 +9,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
-public class courseManagement {
+public class CourseManagement {
 
     static EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU");
 
@@ -22,7 +23,7 @@ public class courseManagement {
 
         System.out.println(course);
         System.out.println("Teacher: " + " " + course.getTeacher());
-        course.getStudents().size();
+        course.getStudents().size(); //To counter a bug that prevents list of Students from being initialized
         System.out.println("Students: " + course.getStudents());
 
         em.getTransaction().commit();
@@ -68,4 +69,43 @@ public class courseManagement {
         em.close();
     }
 
+    public static void removeCourse(int id){
+        EntityManager em = emf.createEntityManager();
+
+        Course courseToRemove = em.find(Course.class, id);
+
+        em.getTransaction().begin();
+        em.remove(courseToRemove);
+        em.getTransaction().commit();
+        em.close();
+
+    }
+
+    public static void addStudentToCourse(int idOfStudentToAdd, int idOfCourseToAddStudentTo){
+        EntityManager em = emf.createEntityManager();
+
+        em.getTransaction().begin();
+
+        Student addStudentToCourse = em.find(Student.class, idOfStudentToAdd);
+        Course courseToAddStudentTo = em.find(Course.class, idOfCourseToAddStudentTo);
+
+        courseToAddStudentTo.addStudent(addStudentToCourse);
+
+        em.getTransaction().commit();
+        em.close();
+    }
+
+    public static void removeStudentFromCourse(int idOfStudentToRemove, int idOfCourseToRemoveStudentFrom){
+        EntityManager em = emf.createEntityManager();
+
+        em.getTransaction().begin();
+
+        Student removeStudentFromCourse = em.find(Student.class, idOfStudentToRemove);
+        Course courseToRemoveStudentFrom = em.find(Course.class, idOfCourseToRemoveStudentFrom);
+
+        courseToRemoveStudentFrom.removeStudent(removeStudentFromCourse);
+
+        em.getTransaction().commit();
+        em.close();
+    }
 }

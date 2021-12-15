@@ -1,5 +1,5 @@
 import management.StudentManager;
-import management.courseManagement;
+import management.CourseManagement;
 
 import java.util.Scanner;
 
@@ -212,17 +212,18 @@ public class UI {
                 System.out.println("Id of Course:");
                 int id = sc.nextInt();
                 sc.nextLine();
-                courseManagement.printCourse(id);
+                CourseManagement.printCourse(id);
                 break;
 
             case 2:
-                courseManagement.printAllCourses();
+                CourseManagement.printAllCourses();
                 break;
 
             case 3:
                 System.out.println("Name of new Course:");
                 String name = sc.nextLine();
-                courseManagement.addCourse(name);
+                CourseManagement.addCourse(name);
+                break;
 
             case 4:
                 System.out.println("Id of Course?");
@@ -230,8 +231,35 @@ public class UI {
                 sc.nextLine();
                 System.out.println("New name of Course?");
                 String newName = sc.nextLine();
-                courseManagement.updateCourse(newName, idToChange);
+                CourseManagement.updateCourse(newName, idToChange);
+                break;
 
+            case 5:
+                System.out.println("Id of Course?");
+                int idToRemove = sc.nextInt();
+                sc.nextLine();
+                CourseManagement.removeCourse(idToRemove);
+                break;
+
+            case 6:
+                System.out.println("Id of Student to add to Course?");
+                int addStudent = sc.nextInt();
+                sc.nextLine();
+                System.out.println("Id of Course to add Student to?");
+                int addToCourse = sc.nextInt();
+                sc.nextLine();
+                CourseManagement.addStudentToCourse(addStudent, addToCourse);
+                break;
+
+            case 7:
+                System.out.println("Id of Student to remove from Course?");
+                int removeStudent = sc.nextInt();
+                sc.nextLine();
+                System.out.println("Id of Course to remove Student from?");
+                int removeFromCourse = sc.nextInt();
+                sc.nextLine();
+                CourseManagement.removeStudentFromCourse(removeStudent, removeFromCourse);
+                break;
 
             case 0:
                 courseMenuLoop = false;
