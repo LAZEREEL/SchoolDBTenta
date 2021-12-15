@@ -10,7 +10,7 @@ public class Teacher {
     private int age;
     private String gender;
     private double salary;
-    @OneToOne
+    @OneToOne(mappedBy = "teacher")
     private Course course;
     @ManyToOne
     private Department department;
