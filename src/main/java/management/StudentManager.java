@@ -1,5 +1,6 @@
 package management;
 
+import Entity.Course;
 import Entity.Student;
 
 import javax.persistence.EntityManager;
@@ -176,5 +177,20 @@ public class StudentManager {
         em.getTransaction().commit();
 
         em.close();
+    }
+
+    public static void removeStudent(int id){
+        EntityManager em = emf.createEntityManager();
+
+        Student StudentToRemove = em.find(Student.class, id);
+
+        em.getTransaction().begin();
+
+        StudentToRemove.setCourses(null);
+
+        em.remove(StudentToRemove);
+        em.getTransaction().commit();
+        em.close();
+
     }
 }
