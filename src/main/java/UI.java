@@ -256,9 +256,27 @@ public class UI {
                 int removeStudent = sc.nextInt();
                 sc.nextLine();
                 System.out.println("Id of Course to remove Student from?");
-                int removeFromCourse = sc.nextInt();
+                int removeStudentFromCourse = sc.nextInt();
                 sc.nextLine();
-                CourseManagement.removeStudentFromCourse(removeStudent, removeFromCourse);
+                CourseManagement.removeStudentFromCourse(removeStudent, removeStudentFromCourse);
+                break;
+
+            case 8:
+                System.out.println("Id of Teacher to add to Course?");
+                int addTeacher = sc.nextInt();
+                sc.nextLine();
+                System.out.println("Id of Course to add Teacher to?");
+                int addTeacherToCourse = sc.nextInt();
+                sc.nextLine();
+                CourseManagement.addTeacherToCourse(addTeacher, addTeacherToCourse);
+                break;
+
+            case 9:
+
+                System.out.println("Id of Course to remove Teacher from?");
+                int removeTeacherFromCourse = sc.nextInt();
+                sc.nextLine();
+                CourseManagement.removeTeacherFromCourse(removeTeacherFromCourse);
                 break;
 
             case 0:

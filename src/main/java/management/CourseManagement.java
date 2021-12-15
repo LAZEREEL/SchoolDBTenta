@@ -108,4 +108,32 @@ public class CourseManagement {
         em.getTransaction().commit();
         em.close();
     }
+
+    public static void addTeacherToCourse(int idOfTeacherToAdd, int idOfCourseToAddTeacherTo){
+        EntityManager em = emf.createEntityManager();
+
+        em.getTransaction().begin();
+
+        Teacher addTeacherToCourse = em.find(Teacher.class, idOfTeacherToAdd);
+        Course courseToAddTeacherTo = em.find(Course.class, idOfCourseToAddTeacherTo);
+
+        courseToAddTeacherTo.setTeacher(addTeacherToCourse);
+
+        em.getTransaction().commit();
+        em.close();
+    }
+
+    public static void removeTeacherFromCourse(int idOfCourseToRemoveTeacherFrom){
+        EntityManager em = emf.createEntityManager();
+
+        em.getTransaction().begin();
+
+
+        Course courseToRemoveTeacherFrom = em.find(Course.class, idOfCourseToRemoveTeacherFrom);
+
+        courseToRemoveTeacherFrom.setTeacher(null);
+
+        em.getTransaction().commit();
+        em.close();
+    }
 }
