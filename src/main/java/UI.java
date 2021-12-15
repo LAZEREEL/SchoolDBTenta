@@ -1,3 +1,4 @@
+import Entity.DepartmentManager;
 import Entity.Teacher;
 import management.CourseManagement;
 import management.StudentManager;
@@ -154,7 +155,7 @@ public class UI {
                 int age = sc.nextInt();
                 sc.nextLine();
 
-                StudentManager.createStudent(name,gender,age);
+                StudentManager.createStudent(name, gender, age);
                 break;
 
             case 4:
@@ -275,7 +276,6 @@ public class UI {
     }
 
 
-
     public static void teacherMenu(int choice) {
 
         switch (choice) {
@@ -354,34 +354,48 @@ public class UI {
     }
 
 
-
-
     public static void departmentMenu() {
         System.out.println("\n=================================");
         System.out.println("           Department Menu               ");
         System.out.println("=================================");
         System.out.println("1.Print Department");
-        System.out.println("2.Print all Departments");
-        System.out.println("3.Add Department");
-        System.out.println("4.Update Department");
-        System.out.println("5.Remove Department");
-        System.out.println("6.Connect Course to Department");
-        System.out.println("7.Disconnect Course from Department");
-        System.out.println("8.Connect Teacher to Department");
-        System.out.println("9.Disconnect Teacher from Department");
+        System.out.println("2.Create department");
+        System.out.println("3.Update Department");
+        System.out.println("4.Remove Department");
+        System.out.println("5.Connect Course to Department");
+        System.out.println("6.Disconnect Course from Department");
+        System.out.println("7.Connect Teacher to Department");
+        System.out.println("8.Disconnect Teacher from Department");
 
-        System.out.println("\n0.Exit");
+        System.out.println("\n0. Return to the main menu");
         System.out.println("=================================");
 
     }
 
     public static void departmentMenu(int choice) {
-
+        DepartmentManager departmentManager = new DepartmentManager();
         switch (choice) {
 
             case 1:
-
+                departmentManager.printAllDepartment();
                 break;
+
+            case 2:
+                departmentManager.createDepartment();
+                break;
+
+            case 3:
+                departmentManager.updateDepartment();
+                break;
+
+            case 4:
+                departmentManager.removeDepartment();
+                break;
+
+            case 5:
+                departmentManager.connectCourse();
+                break;
+
 
             case 0:
                 departmentMenuLoop = false;
