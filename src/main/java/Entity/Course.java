@@ -1,6 +1,7 @@
 package Entity;
 
 
+        import java.util.ArrayList;
         import java.util.List;
         import javax.persistence.Basic;
         import javax.persistence.Entity;
@@ -20,7 +21,7 @@ public class Course {
     @OneToOne(mappedBy = "course")
     private Teacher teacher;
     @ManyToMany(mappedBy = "courses")
-    private List<Student> students;
+    private List<Student> students = new ArrayList<>();
 
     public Course() {
     }
@@ -68,10 +69,12 @@ public class Course {
 
     public void addStudent(Student student) {
         getStudents().add(student);
+        student.getCourses().add(this);
     }
 
     public void removeStudent(Student student) {
         getStudents().remove(student);
+        student.getCourses().remove(this);
     }
 
     @Override

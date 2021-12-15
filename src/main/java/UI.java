@@ -195,7 +195,6 @@ public class UI {
 
             default:
                 System.out.println("No such choice. Try again!");
-                break;
         }
     }
 

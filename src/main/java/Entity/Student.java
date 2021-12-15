@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import java.util.ArrayList;
 import java.util.List;
 @Entity
 public class Student {
@@ -17,7 +18,7 @@ public class Student {
     private int age;
 
     @ManyToMany
-    private List<Course> courses;
+    private List<Course> courses = new ArrayList<>();
 
     public Student() {
     }
