@@ -4,11 +4,10 @@ import Entity.Course;
 import Entity.Student;
 import Entity.Teacher;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 public class CourseManagement {
 
@@ -143,9 +142,19 @@ public class CourseManagement {
     }
 
     public static void displayAllCourses() {
-
         //kurser (Printa ut alla kurser med id och namn, ansvarig lärare med id och namn och antal studenter)
+        EntityManager em = emf.createEntityManager();
 
+        TypedQuery<Course> queryA = em.createQuery("SELECT b FROM Course b", Course.class);
+
+        Stream<Course> courses = queryA.getResultStream().sorted();
+
+        System.out.println("======================================== Courses ========================================");
+        courses.forEach(b -> System.out.println(" Id: " + b.getId() + " " + "Name: " + b.getName() + " "
+                + "Number of Students: " + b.getStudents().size() + " " + "Teacher: " + " " + "id: " +
+                b.getTeacher().getId() + " " + b.getTeacher().getName() + " "));
+
+        em.close();
     }
 
     public static void displaySpecificCourse() {
@@ -156,10 +165,5 @@ public class CourseManagement {
         //könsfördelning i kursen
 
     }
-
-
-
-
-
 }
 
