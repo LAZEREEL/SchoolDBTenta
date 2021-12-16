@@ -9,7 +9,7 @@ import java.util.List;
  * @author Anthony Kalkhorani
  */
 @Entity
-public class Department {
+public class Department extends Course {
 
     @Id
     @GeneratedValue
@@ -30,15 +30,25 @@ public class Department {
         this.depName = depName;
     }
 
-    @ManyToOne
-    private Course course;
+    @OneToMany
+    private List<Course> courseList = new ArrayList<>();
 
-    public Course getCourse() {
-        return course;
+    public List<Course> getCourseList() {
+        return courseList;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setCourseList(List<Course> courseList) {
+        this.courseList = courseList;
+    }
+
+    public void addCourse(Course course) {
+        getCourseList().add(course);
+        courseList.add(course);
+    }
+
+    public void removeCourse(Course course) {
+        getCourseList().remove(course);
+        courseList.remove(course);
     }
 
     @OneToMany (mappedBy="department", cascade=CascadeType.ALL, fetch = FetchType.EAGER)
