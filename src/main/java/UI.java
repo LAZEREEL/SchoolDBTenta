@@ -1,5 +1,6 @@
-import Entity.DepartmentManager;
+import management.DepartmentManager;
 import Entity.Teacher;
+import Entity.*;
 import management.StudentManager;
 import management.CourseManagement;
 import management.TeacherManagement;
@@ -284,13 +285,6 @@ public class UI {
                 break;
 
             case 5:
-                System.out.println("Id of Course?");
-                int idToRemove = sc.nextInt();
-                sc.nextLine();
-                CourseManagement.removeCourse(idToRemove);
-                break;
-
-            case 6:
                 System.out.println("Id of Student to add to Course?");
                 int addStudent = sc.nextInt();
                 sc.nextLine();
@@ -438,7 +432,7 @@ public class UI {
     }
 
 
-    public static void departmentMenu() {
+    public static void departmentMenuUi() {
         System.out.println("\n=================================");
         System.out.println("           Department Menu               ");
         System.out.println("=================================");
@@ -450,6 +444,7 @@ public class UI {
         System.out.println("6.Disconnect Course from Department");
         System.out.println("7.Connect Teacher to Department");
         System.out.println("8.Disconnect Teacher from Department");
+        System.out.println("9. Search");
 
         System.out.println("\n0. Return to the main menu");
         System.out.println("=================================");
@@ -477,8 +472,12 @@ public class UI {
                 break;
 
             case 5:
-                departmentManager.connectCourse();
+                departmentManager.addCourseToDepartment();
                 break;
+
+            case 6:
+                departmentManager.removeCourseFromDepartment();
+
 
 
             case 0:

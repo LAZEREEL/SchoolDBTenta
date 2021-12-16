@@ -1,6 +1,7 @@
-package Entity;
+package management;
 import Entity.Department;
 import javax.persistence.*;
+import Entity.Course;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
@@ -12,7 +13,7 @@ public class DepartmentManager {
 
     public void printAllDepartment() { // 1
         EntityManager em = emf.createEntityManager();
-        TypedQuery<Department> departmentTypedQuery = em.createQuery("Select dep from Department  dep", Department.class);
+        TypedQuery<Department> departmentTypedQuery = em.createQuery("Select d from Department d", Department.class);
         List<Department> departmentList = departmentTypedQuery.getResultList();
         departmentList.sort(Comparator.comparing(Department::getDepName));
         System.out.println(departmentList);
@@ -20,15 +21,15 @@ public class DepartmentManager {
 
 
     public void createDepartment() { // 2
-        Scanner sc = new Scanner(System.in);
         EntityManager em = emf.createEntityManager();
-        System.out.println("Enter the name of the department: ");
-        String depName = sc.nextLine();
+        Department department = new Department();
+        Scanner sc = new Scanner(System.in);
         em.getTransaction().begin();
-        Department department = new Department(depName);
-        em.persist(department);
+        System.out.println("Name: ");
+        String name = sc.nextLine();
+        department.setDepName(name);
         em.getTransaction().commit();
-        System.out.println(department + " have been added");
+        // Person person = new Person();
     }
 
     public void updateDepartment() { // 3
@@ -64,32 +65,7 @@ public class DepartmentManager {
     }
 
 
-    public void connectCourse()  {
-        Scanner sc = new Scanner(System.in);
-        EntityManager em = emf.createEntityManager();
 
-        printAllDepartment();
-
-        System.out.println("Department id:");
-        int depId = sc.nextInt();
-        sc.nextLine();
-
-        System.out.println("Course id:");
-        int courseId = sc.nextInt();
-        sc.nextLine();
-
-        Department department = em.find(Department.class, depId);
-
-        Course course = em.find(Course.class, courseId);
-
-        em.getTransaction().begin();
-
-        department.setCourse(course);
-
-        em.getTransaction().commit();
-
-        em.close();
-    }
 
 
     public void searchDepartmentById() { // 10
@@ -141,9 +117,61 @@ public class DepartmentManager {
             Department department = departmentTypedQuery.getSingleResult();
             department.getId();
             System.out.println("Headmaster FOUND!");
-            System.out.println(department.getCourse());
+            System.out.println(department.getCourseList());
         } catch (NoResultException nre) {
             System.out.println("No department found: " + nre);
         }
+    }
+
+    public void addCourseToDepartment() {
+        DepartmentManager departmentManager = new DepartmentManager();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Department ID");
+        int depId = sc.nextInt();
+        sc.nextLine();
+
+        System.out.println("Course ID");
+        int courseId = sc.nextInt();
+        sc.nextLine();
+        departmentManager.addCourseToDepartment(depId, courseId);
+    }
+
+    private void addCourseToDepartment(int depId, int courseId) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        Course course = em.find(Course.class, courseId);
+        Department department = em.find(Department.class, depId);
+        department.addCourse(course);
+        em.getTransaction().commit();
+        em.close();
+    }
+
+
+    public void removeCourseFromDepartment() {
+        DepartmentManager depmang = new DepartmentManager();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Department ID");
+        int depId = sc.nextInt();
+        sc.nextLine();
+
+        System.out.println("Course ID");
+        int courseId = sc.nextInt();
+        sc.nextLine();
+        depmang.removeCourse(depId, courseId);
+    }
+
+
+    private void removeCourse(int depId, int courseId) {
+        EntityManager em = emf.createEntityManager();
+
+        em.getTransaction().begin();
+
+        Course course = em.find(Course.class, courseId);
+        Department department = em.find(Department.class, depId);
+
+        department.removeCourse(course);
+
+        em.getTransaction().commit();
+        em.close();
     }
 }
