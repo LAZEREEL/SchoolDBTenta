@@ -12,25 +12,27 @@ public class DepartmentManager {
     static EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU");
 
 
-    public void printAllDepartment() { // 1
+    public void printAllDepartment() {
         EntityManager em = emf.createEntityManager();
-        TypedQuery<Department> departmentTypedQuery = em.createQuery("Select d from Department d", Department.class);
-        List<Department> departmentList = departmentTypedQuery.getResultList();
-        departmentList.sort(Comparator.comparing(Department::getDepName));
-        System.out.println(departmentList);
+
+        em.getTransaction().begin();
+
+        TypedQuery<Department> departmentTypedQuery = em.createQuery("SELECT department FROM Department department", Department.class);
+        departmentTypedQuery.getResultStream().forEach(System.out::println);
+
+        em.close();
     }
 
 
     public void createDepartment() { // 2
         EntityManager em = emf.createEntityManager();
-        Department department = new Department();
         Scanner sc = new Scanner(System.in);
         em.getTransaction().begin();
         System.out.println("Name: ");
         String name = sc.nextLine();
-        department.setDepName(name);
+        Department department = new Department(name);
+        em.persist(department);
         em.getTransaction().commit();
-        // Person person = new Person();
     }
 
     public void updateDepartment() { // 3
@@ -66,9 +68,6 @@ public class DepartmentManager {
     }
 
 
-
-
-
     public void searchDepartmentById() { // 10
         Scanner sc = new Scanner(System.in);
         EntityManager em = emf.createEntityManager();
@@ -82,24 +81,6 @@ public class DepartmentManager {
             department.getId();
             System.out.println("DEPARTMENT FOUND!");
             System.out.println(department);
-        } catch (NoResultException nre) {
-            System.out.println("No department found: " + nre);
-        }
-    }
-
-    public void findOutTeachers() { // 11
-        Scanner sc = new Scanner(System.in);
-        EntityManager em = emf.createEntityManager();
-        System.out.println("enter department id: ");
-        int id = sc.nextInt();
-        TypedQuery<Department> departmentTypedQuery = em.createQuery("SELECT department from " +
-                "Department department where department.id=:id", Department.class);
-        departmentTypedQuery.setParameter("id", id);
-        try {
-            Department department = departmentTypedQuery.getSingleResult();
-            department.getId();
-            System.out.println("Headmaster FOUND!");
-            System.out.println(department.getTeacherList());
         } catch (NoResultException nre) {
             System.out.println("No department found: " + nre);
         }
@@ -138,14 +119,21 @@ public class DepartmentManager {
     }
 
     private void addCourseToDepartment(int depId, int courseId) {
+
         EntityManager em = emf.createEntityManager();
+
         em.getTransaction().begin();
+
         Course course = em.find(Course.class, courseId);
         Department department = em.find(Department.class, depId);
+
         department.addCourse(course);
+
         em.getTransaction().commit();
         em.close();
+
     }
+
 
 
     public void removeCourseFromDepartment() {

@@ -9,7 +9,7 @@ import java.util.List;
  * @author Anthony Kalkhorani
  */
 @Entity
-public class Department extends Course {
+public class Department {
 
     @Id
     @GeneratedValue
@@ -79,6 +79,7 @@ public class Department extends Course {
 
     public Department() {
     }
+
     public Department(String depName) {
         this.depName = depName;
     }
