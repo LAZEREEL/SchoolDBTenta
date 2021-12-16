@@ -580,7 +580,10 @@ public class UI {
                 break;
 
             case 2:
-                management.CourseManagement.displaySpecificCourse();
+                System.out.print("\nId?");
+                int id = sc.nextInt();
+                sc.nextLine();
+                management.CourseManagement.displaySpecificCourse(id);
                 break;
 
             case 0:

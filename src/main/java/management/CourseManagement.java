@@ -7,6 +7,7 @@ import Entity.Teacher;
 import javax.persistence.*;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class CourseManagement {
@@ -147,22 +148,47 @@ public class CourseManagement {
 
         TypedQuery<Course> queryA = em.createQuery("SELECT b FROM Course b", Course.class);
 
-        Stream<Course> courses = queryA.getResultStream().sorted();
+        Stream<Course> courses = queryA.getResultStream();
 
         System.out.println("======================================== Courses ========================================");
         courses.forEach(b -> System.out.println(" Id: " + b.getId() + " " + "Name: " + b.getName() + " "
                 + "Number of Students: " + b.getStudents().size() + " " + "Teacher: " + " " + "id: " +
-                b.getTeacher().getId() + " " + b.getTeacher().getName() + " "));
+                b.getTeacher().getId() + " " + "Name: " + b.getTeacher().getName() + " "));
 
         em.close();
     }
 
-    public static void displaySpecificCourse() {
+    public static void displaySpecificCourse(int id) {
+        //Teacher needs to be assigned to course for method to work
+        EntityManager em = emf.createEntityManager();
 
-        //Query vill du ha statistik på specifk kurs?
-        // antal elever i kursen
-        //åldersfördelning i kursen
-        //könsfördelning i kursen
+        em.getTransaction().begin();
+        Course course = em.find(Course.class, id);
+        int numberOfStudents = course.getStudents().size();
+
+        Double averageAge = course.getStudents()
+                .stream()
+                .collect(Collectors.averagingInt(p -> p.getAge()));
+
+        List<Course> female = em.createQuery("SELECT s FROM Student s WHERE s.gender=:gender").setParameter("gender","female").getResultList();
+
+        double numberOfFemale = female.size();
+        double avgFemaleInCourse = numberOfFemale / numberOfStudents;
+
+
+        List<Course> male = em.createQuery("SELECT s FROM Student s WHERE s.gender=:gender").setParameter("gender","male").getResultList();
+
+        double numberOfMale = male.size();
+        double avgMaleInCourse = numberOfMale / numberOfStudents;
+
+
+        System.out.println("===================================== " + "Id: " + course.getId() + " " + "Course: " + course.getName() + " =====================================");
+        System.out.println("Number of Students: " + numberOfStudents);
+        System.out.println("Average age of Students: " + averageAge);
+        System.out.println("Gender distribution");
+        System.out.println("Female students: " + numberOfFemale + " Average: " + avgFemaleInCourse);
+        System.out.println("Male students: " + numberOfMale + " Average: " + avgMaleInCourse);
+
 
     }
 }
