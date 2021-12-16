@@ -1,6 +1,5 @@
 package Entity;
-
-
+import Entity.Department;
 import javax.persistence.*;
 import java.util.Comparator;
 import java.util.List;

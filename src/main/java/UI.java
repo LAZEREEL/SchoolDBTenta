@@ -1,8 +1,9 @@
 import Entity.DepartmentManager;
 import Entity.Teacher;
-import management.CourseManagement;
 import management.StudentManager;
+import management.CourseManagement;
 import management.TeacherManagement;
+
 
 import java.util.Scanner;
 
@@ -15,8 +16,11 @@ public class UI {
     static boolean teacherMenuLoop = true;
     static boolean departmentMenuLoop = true;
     static boolean statisticsMenuLoop = true;
+    static boolean courseStatisticsMenuLoop = true;
 
     public static void menuLoop() {
+
+        mainMenuLoop = true;
 
         while (mainMenuLoop) {
             mainMenu();
@@ -34,6 +38,9 @@ public class UI {
         switch (choice) {
 
             case 1:
+
+                studentMenuLoop = true;
+
                 while (studentMenuLoop) {
                     studentMenuUI();
 
@@ -46,6 +53,9 @@ public class UI {
                 break;
 
             case 2:
+
+                courseMenuLoop = true;
+
                 while (courseMenuLoop) {
                     courseMenuUI();
 
@@ -56,9 +66,13 @@ public class UI {
                     courseMenu(a);
                 }
                 break;
+
             case 3:
+
+                teacherMenuLoop = true;
+
                 while (teacherMenuLoop) {
-                    teacherMenu();
+                    teacherMenuUi();
 
                     System.out.print("\nMake your choice:");
                     int a = sc.nextInt();
@@ -69,8 +83,11 @@ public class UI {
                 break;
 
             case 4:
+
+                departmentMenuLoop = true;
+
                 while (departmentMenuLoop) {
-                    departmentMenu();
+                    departmentMenuUi();
 
                     System.out.print("\nMake your choice:");
                     int a = sc.nextInt();
@@ -82,6 +99,18 @@ public class UI {
 
             case 5:
 
+                statisticsMenuLoop = true;
+
+                while (statisticsMenuLoop) {
+                    statisticsMenuUi();
+
+                    System.out.print("\nMake your choice:");
+                    int a = sc.nextInt();
+                    sc.nextLine();
+
+                    statisticsMenu(a);
+
+                }
                 break;
 
 
@@ -130,6 +159,7 @@ public class UI {
 
     public static void studentMenu(int choice) {
 
+
         switch (choice) {
 
             case 1:
@@ -141,7 +171,7 @@ public class UI {
                 break;
 
             case 2:
-
+                StudentManager.printAllStudents();
                 break;
 
             case 3:
@@ -159,11 +189,18 @@ public class UI {
                 break;
 
             case 4:
+                System.out.print("Id of student:");
+                id = sc.nextInt();
+                sc.nextLine();
 
+                StudentManager.updateStudentMenu(id);
                 break;
 
             case 5:
-
+                System.out.print("Id of student:");
+                id = sc.nextInt();
+                sc.nextLine();
+                StudentManager.removeStudent(id);
                 break;
 
             case 6:
@@ -235,6 +272,7 @@ public class UI {
                 System.out.println("Name of new Course:");
                 String name = sc.nextLine();
                 CourseManagement.addCourse(name);
+                break;
 
             case 4:
                 System.out.println("Id of Course?");
@@ -243,7 +281,52 @@ public class UI {
                 System.out.println("New name of Course?");
                 String newName = sc.nextLine();
                 CourseManagement.updateCourse(newName, idToChange);
+                break;
 
+            case 5:
+                System.out.println("Id of Course?");
+                int idToRemove = sc.nextInt();
+                sc.nextLine();
+                CourseManagement.removeCourse(idToRemove);
+                break;
+
+            case 6:
+                System.out.println("Id of Student to add to Course?");
+                int addStudent = sc.nextInt();
+                sc.nextLine();
+                System.out.println("Id of Course to add Student to?");
+                int addToCourse = sc.nextInt();
+                sc.nextLine();
+                CourseManagement.addStudentToCourse(addStudent, addToCourse);
+                break;
+
+            case 7:
+                System.out.println("Id of Student to remove from Course?");
+                int removeStudent = sc.nextInt();
+                sc.nextLine();
+                System.out.println("Id of Course to remove Student from?");
+                int removeStudentFromCourse = sc.nextInt();
+                sc.nextLine();
+                CourseManagement.removeStudentFromCourse(removeStudent, removeStudentFromCourse);
+                break;
+
+            case 8:
+                System.out.println("Id of Teacher to add to Course?");
+                int addTeacher = sc.nextInt();
+                sc.nextLine();
+                System.out.println("Id of Course to add Teacher to?");
+                int addTeacherToCourse = sc.nextInt();
+                sc.nextLine();
+                CourseManagement.addTeacherToCourse(addTeacher, addTeacherToCourse);
+                break;
+
+            case 9:
+
+                System.out.println("Id of Course to remove Teacher from?");
+                int removeTeacherFromCourse = sc.nextInt();
+                sc.nextLine();
+                CourseManagement.removeTeacherFromCourse(removeTeacherFromCourse);
+                break;
 
             case 0:
                 courseMenuLoop = false;
@@ -255,7 +338,7 @@ public class UI {
         }
     }
 
-    public static void teacherMenu() {
+    public static void teacherMenuUi() {
 
         System.out.println("\n=================================");
         System.out.println("           Teacher Menu               ");
@@ -274,6 +357,7 @@ public class UI {
         System.out.println("=================================");
 
     }
+
 
 
     public static void teacherMenu(int choice) {
@@ -407,8 +491,101 @@ public class UI {
         }
     }
 
-    public static void statisticsMenu() {
+    public static void statisticsMenuUi() {
+
+        System.out.println("\n=================================");
+        System.out.println("         Statistics Menu               ");
+        System.out.println("=================================");
+        System.out.println("1.Student Statistics");
+        System.out.println("2.Teacher Statistics");
+        System.out.println("3.Course Statistics");
+        System.out.println("4.Department Statistics");
+
+        System.out.println("\n0.Exit");
+        System.out.println("=================================");
 
     }
 
+
+    public static void statisticsMenu(int choice) {
+
+        statisticsMenuLoop = true;
+
+        switch (choice) {
+
+            case 1:
+                StudentManager.studentStatistics();
+                break;
+
+            case 2:
+                //teacherStatistics();
+                break;
+
+            case 3:
+                courseStatisticsMenuLoop = true;
+
+                courseStatisticsMenuLoop();
+
+                break;
+
+            case 4:
+                //departmentStatistics();
+                break;
+
+
+            case 0:
+                statisticsMenuLoop = false;
+
+                break;
+
+            default:
+                System.out.println("No such choice. Try again!");
+        }
+    }
+
+    public static void courseStatisticsUi() {
+
+
+        System.out.println("\n=======================================");
+        System.out.println("           Course Statistics             ");
+        System.out.println("=========================================");
+        System.out.println("1.Display all courses");
+        System.out.println("2.Display statistics for specific course");
+
+        System.out.println("\n0.Exit");
+        System.out.println("=================================");
+
+    }
+
+    public static void courseStatisticsMenuLoop() {
+
+            courseStatisticsMenuLoop = true;
+
+        while (courseStatisticsMenuLoop) {
+            courseStatisticsUi();
+
+            System.out.print("\nMake your choice:");
+            int choice = sc.nextInt();
+            sc.nextLine();
+
+            courseStatisticsMenu(choice);
+        }
+    }
+
+    public static void courseStatisticsMenu(int choice) {
+        switch (choice) {
+
+            case 1:
+                management.CourseManagement.displayAllCourses();
+                break;
+
+            case 2:
+                management.CourseManagement.displaySpecificCourse();
+                break;
+
+            case 0:
+                courseStatisticsMenuLoop = false;
+                break;
+        }
+    }
 }

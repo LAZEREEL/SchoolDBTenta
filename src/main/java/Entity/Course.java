@@ -1,14 +1,8 @@
 package Entity;
 
-
-        import java.util.ArrayList;
-        import java.util.List;
-        import javax.persistence.Basic;
-        import javax.persistence.Entity;
-        import javax.persistence.GeneratedValue;
-        import javax.persistence.Id;
-        import javax.persistence.ManyToMany;
-        import javax.persistence.OneToOne;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.*;
 
 @Entity
 public class Course {
@@ -18,8 +12,9 @@ public class Course {
     private int id;
     @Basic
     private String Name;
-    @OneToOne(mappedBy = "course")
+    @OneToOne
     private Teacher teacher;
+
     @ManyToMany(mappedBy = "courses")
     private List<Student> students = new ArrayList<>();
 
@@ -46,10 +41,6 @@ public class Course {
     public void setName(String name) {
         Name = name;
     }
-
-
-
-
 
     public Teacher getTeacher() {
         return teacher;

@@ -8,12 +8,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
+import java.util.Scanner;
 
 public class CourseManagement {
 
     static EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU");
 
-    public static void printCourse(int id){
+    public static void printCourse(int id) {
 
         EntityManager em = emf.createEntityManager();
 
@@ -32,7 +33,7 @@ public class CourseManagement {
 
     }
 
-    public static void printAllCourses(){
+    public static void printAllCourses() {
         EntityManager em = emf.createEntityManager();
 
         em.getTransaction().begin();
@@ -44,19 +45,20 @@ public class CourseManagement {
 
     }
 
-    public static void addCourse(String name){
+    public static void addCourse(String name) {
         EntityManager em = emf.createEntityManager();
 
         Course newCourse = new Course(name);
 
         em.getTransaction().begin();
+
         em.persist(newCourse);
         em.getTransaction().commit();
         em.close();
 
     }
 
-    public static void updateCourse(String newName, int id){
+    public static void updateCourse(String newName, int id) {
         EntityManager em = emf.createEntityManager();
 
         em.getTransaction().begin();
@@ -64,24 +66,27 @@ public class CourseManagement {
 
         updateCourse.setName(newName);
 
-        em.refresh(updateCourse);
         em.getTransaction().commit();
         em.close();
     }
 
-    public static void removeCourse(int id){
+    public static void removeCourse(int id) {
         EntityManager em = emf.createEntityManager();
 
         Course courseToRemove = em.find(Course.class, id);
 
         em.getTransaction().begin();
+
+        courseToRemove.setTeacher(null);
+        courseToRemove.setStudents(null);
+
         em.remove(courseToRemove);
         em.getTransaction().commit();
         em.close();
 
     }
 
-    public static void addStudentToCourse(int idOfStudentToAdd, int idOfCourseToAddStudentTo){
+    public static void addStudentToCourse(int idOfStudentToAdd, int idOfCourseToAddStudentTo) {
         EntityManager em = emf.createEntityManager();
 
         em.getTransaction().begin();
@@ -95,7 +100,7 @@ public class CourseManagement {
         em.close();
     }
 
-    public static void removeStudentFromCourse(int idOfStudentToRemove, int idOfCourseToRemoveStudentFrom){
+    public static void removeStudentFromCourse(int idOfStudentToRemove, int idOfCourseToRemoveStudentFrom) {
         EntityManager em = emf.createEntityManager();
 
         em.getTransaction().begin();
@@ -109,7 +114,7 @@ public class CourseManagement {
         em.close();
     }
 
-    public static void addTeacherToCourse(int idOfTeacherToAdd, int idOfCourseToAddTeacherTo){
+    public static void addTeacherToCourse(int idOfTeacherToAdd, int idOfCourseToAddTeacherTo) {
         EntityManager em = emf.createEntityManager();
 
         em.getTransaction().begin();
@@ -123,7 +128,7 @@ public class CourseManagement {
         em.close();
     }
 
-    public static void removeTeacherFromCourse(int idOfCourseToRemoveTeacherFrom){
+    public static void removeTeacherFromCourse(int idOfCourseToRemoveTeacherFrom) {
         EntityManager em = emf.createEntityManager();
 
         em.getTransaction().begin();
@@ -136,4 +141,25 @@ public class CourseManagement {
         em.getTransaction().commit();
         em.close();
     }
+
+    public static void displayAllCourses() {
+
+        //kurser (Printa ut alla kurser med id och namn, ansvarig lärare med id och namn och antal studenter)
+
+    }
+
+    public static void displaySpecificCourse() {
+
+        //Query vill du ha statistik på specifk kurs?
+        // antal elever i kursen
+        //åldersfördelning i kursen
+        //könsfördelning i kursen
+
+    }
+
+
+
+
+
 }
+

@@ -13,10 +13,7 @@ import java.util.Scanner;
 public class TeacherManagement {
     static Scanner sc = new Scanner(System.in);
     static EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU");
-
-
-
-
+    static DepartmentManager dm = new DepartmentManager();
 
     public static void disconnectTeacherFromDepartment() {
 
@@ -43,12 +40,11 @@ public class TeacherManagement {
         EntityManager em = emf.createEntityManager();
 
         printAllTeachersAndTheirDepartment();
-
         System.out.println("Teacher id:");
         int teacherId = sc.nextInt();
         sc.nextLine();
 
-
+        dm.printAllDepartment();
         System.out.println("Department id:");
         int departmentId = sc.nextInt();
         sc.nextLine();
@@ -79,6 +75,8 @@ public class TeacherManagement {
 
         em.remove(theTeacher);
 
+        theTeacher.getCourse().setTeacher(null);
+
         em.getTransaction().commit();
 
         em.close();
@@ -94,7 +92,10 @@ public class TeacherManagement {
 
         em.getTransaction().begin();
 
+
+        teacher.getCourse().setTeacher(null);
         teacher.setCourse(null);
+
 
         em.getTransaction().commit();
 
@@ -309,6 +310,7 @@ public class TeacherManagement {
 
         em.getTransaction().begin();
 
+        theCourse.setTeacher(theTeacher);
         theTeacher.setCourse(theCourse);
 
         em.getTransaction().commit();
@@ -481,5 +483,4 @@ public class TeacherManagement {
 
         }
     }
-
 }
