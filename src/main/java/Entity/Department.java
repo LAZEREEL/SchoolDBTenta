@@ -51,6 +51,7 @@ public class Department {
         courseList.remove(course);
     }
 
+
     @OneToMany (mappedBy="department", cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Teacher> teacherList = new ArrayList<>();
     public List<Teacher> getTeacherList() {
@@ -70,13 +71,6 @@ public class Department {
         teacherList.remove(teacher);
     }
 
-
-
-
-
-
-
-
     public Department() {
     }
 
@@ -88,6 +82,7 @@ public class Department {
     public String toString() {
         return "Department{" +
                 "id=" + id +
-                ", depName='" + depName + '\'';
+                ", depName='" + depName + '\''
+                +"Courses: "+courseList;
     }
 }

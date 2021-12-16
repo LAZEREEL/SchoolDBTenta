@@ -1,11 +1,15 @@
 package management;
+
 import Entity.Department;
 import Entity.Teacher;
+
 import javax.persistence.*;
+
 import Entity.Course;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
+
+import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 
 public class DepartmentManager {
@@ -87,24 +91,6 @@ public class DepartmentManager {
     }
 
 
-    public void readAllCoursesInThisDepartment() { // 12
-        Scanner sc = new Scanner(System.in);
-        EntityManager em = emf.createEntityManager();
-        System.out.println("enter department id: ");
-        int id = sc.nextInt();
-        TypedQuery<Department> departmentTypedQuery = em.createQuery("SELECT department from " +
-                "Department department where department.id=:id", Department.class);
-        departmentTypedQuery.setParameter("id", id);
-        try {
-            Department department = departmentTypedQuery.getSingleResult();
-            department.getId();
-            System.out.println("Headmaster FOUND!");
-            System.out.println(department.getCourseList());
-        } catch (NoResultException nre) {
-            System.out.println("No department found: " + nre);
-        }
-    }
-
     public void addCourseToDepartment() {
         DepartmentManager departmentManager = new DepartmentManager();
         Scanner sc = new Scanner(System.in);
@@ -133,8 +119,6 @@ public class DepartmentManager {
         em.close();
 
     }
-
-
 
     public void removeCourseFromDepartment() {
         DepartmentManager depmang = new DepartmentManager();
@@ -165,7 +149,6 @@ public class DepartmentManager {
     }
 
 
-
     public void addTeacherToDepartment() {
         DepartmentManager depmang = new DepartmentManager();
         Scanner sc = new Scanner(System.in);
@@ -189,7 +172,6 @@ public class DepartmentManager {
         em.close();
     }
 
-
     public void removeTeacherToDepartment() {
         DepartmentManager depmang = new DepartmentManager();
         Scanner sc = new Scanner(System.in);
@@ -197,12 +179,11 @@ public class DepartmentManager {
         int depId = sc.nextInt();
         sc.nextLine();
 
-        System.out.println("Course ID");
+        System.out.println("Teacher ID");
         int teacherId = sc.nextInt();
         sc.nextLine();
         depmang.removeteacher(depId, teacherId);
     }
-
 
 
     private void removeteacher(int depId, int teacherId) {
@@ -213,6 +194,29 @@ public class DepartmentManager {
         department.removeTeacher(teacher);
         em.getTransaction().commit();
         em.close();
+    }
+
+
+    public void viewCoursesInASpecificDepartment() {
+        Scanner sc = new Scanner(System.in);
+        EntityManager em = emf.createEntityManager();
+        System.out.println("enter department id: ");
+        int id = sc.nextInt();
+        TypedQuery<Department> departmentTypedQuery = em.createQuery("SELECT department from " +
+                "Department department where department.id=:id", Department.class);
+
+        departmentTypedQuery.setParameter("id", id);
+
+
+
+        try {
+            Department courseInDepartment = departmentTypedQuery.getSingleResult();
+            courseInDepartment.getCourseList();
+            System.out.println(courseInDepartment.getCourseList().size() + " belongs to" + courseInDepartment);
+
+        } catch (NoResultException nre) {
+            System.out.println("No department found: " + nre);
+        }
     }
 
 }

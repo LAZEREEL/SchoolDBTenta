@@ -327,7 +327,6 @@ public class UI {
 
             case 0:
                 courseMenuLoop = false;
-
                 break;
 
             default:
@@ -640,8 +639,9 @@ public class UI {
                 break;
 
             case 2:
-                departmentManager.readAllCoursesInThisDepartment();
+                departmentManager.viewCoursesInASpecificDepartment();
                 break;
+
 
             case 0:
                 departmentMenuStatisticLoop = false;
