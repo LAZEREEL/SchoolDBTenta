@@ -8,6 +8,8 @@ import management.TeacherManagement;
 
 import java.util.Scanner;
 
+
+
 public class UI {
 
     static Scanner sc = new Scanner(System.in);
@@ -390,7 +392,7 @@ public class UI {
                 break;
 
             case 5:
-
+                TeacherManagement.printAllTeachers();
                 System.out.println("Teacher id:");
                 int tId = UI.sc.nextInt();
                 UI.sc.nextLine();
@@ -517,7 +519,7 @@ public class UI {
                 break;
 
             case 2:
-                //teacherStatistics();
+                TeacherManagement.teacherStatisticsMenu();
                 break;
 
             case 3:
