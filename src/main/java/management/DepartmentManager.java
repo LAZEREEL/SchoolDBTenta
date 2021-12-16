@@ -8,8 +8,7 @@ import javax.persistence.*;
 import Entity.Course;
 
 import java.util.*;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
+
 
 
 public class DepartmentManager {
@@ -156,7 +155,7 @@ public class DepartmentManager {
         int depId = sc.nextInt();
         sc.nextLine();
 
-        System.out.println("Course ID");
+        System.out.println("Teacher ID");
         int teacherId = sc.nextInt();
         sc.nextLine();
         depmang.addteacher(depId, teacherId);
