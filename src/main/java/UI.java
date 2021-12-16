@@ -1,13 +1,12 @@
+import Entity.Department;
 import management.DepartmentManager;
 import Entity.Teacher;
-import Entity.*;
 import management.StudentManager;
 import management.CourseManagement;
 import management.TeacherManagement;
 
 
 import java.util.Scanner;
-
 
 
 public class UI {
@@ -252,7 +251,7 @@ public class UI {
         System.out.println("8.Connect Teacher to Course");
         System.out.println("9.Disconnect Teacher from Course");
 
-        System.out.println("\n0.Exit");
+        System.out.println("\n0.Back to Main Menu");
         System.out.println("=================================");
 
     }
@@ -288,6 +287,13 @@ public class UI {
                 break;
 
             case 5:
+                System.out.println("Id of Course?");
+                int idToRemove = sc.nextInt();
+                sc.nextLine();
+                CourseManagement.removeCourse(idToRemove);
+                break;
+
+            case 6:
                 System.out.println("Id of Student to add to Course?");
                 int addStudent = sc.nextInt();
                 sc.nextLine();
@@ -349,7 +355,7 @@ public class UI {
         System.out.println("8.Connect Teacher to Department");
         System.out.println("9.Disconnect Teacher from Department");
 
-        System.out.println("\n0.Exit");
+        System.out.println("\n0.Back to Main Menu");
         System.out.println("=================================");
 
     }
@@ -506,7 +512,7 @@ public class UI {
         System.out.println("3.Course Statistics");
         System.out.println("4.Department Statistics");
 
-        System.out.println("\n0.Exit");
+        System.out.println("\n0.Back to Main Menu");
         System.out.println("=================================");
 
     }
@@ -560,7 +566,7 @@ public class UI {
         System.out.println("1.Display all courses");
         System.out.println("2.Display statistics for specific course");
 
-        System.out.println("\n0.Exit");
+        System.out.println("\n0.Back to Statistics Menu");
         System.out.println("=================================");
 
     }
@@ -597,6 +603,9 @@ public class UI {
             case 0:
                 courseStatisticsMenuLoop = false;
                 break;
+
+            default:
+                System.out.println("No such choice. Try again!");
         }
     }
 
