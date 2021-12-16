@@ -1,5 +1,6 @@
 package Entity;
 import javax.persistence.*;
+
 @Entity
 public class Teacher {
 

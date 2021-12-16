@@ -83,7 +83,6 @@ public class TeacherManagement {
 
         em.close();
 
-
     }
 
     public static void disconnectTeacherFromCourse(int id) {
@@ -542,7 +541,6 @@ public class TeacherManagement {
     }
 
     public static void genderDistribution(int numberOfTeachers) {
-
         EntityManager em = emf.createEntityManager();
 
         TypedQuery<Teacher> query = em.createQuery("SELECT t FROM Teacher t WHERE t.gender =:gender", Teacher.class);
