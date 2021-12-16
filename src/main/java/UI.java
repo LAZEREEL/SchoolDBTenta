@@ -94,7 +94,7 @@ public class UI {
                     int a = sc.nextInt();
                     sc.nextLine();
 
-                    departmentMenu(a);
+                    departmentMenuUi(a);
                 }
                 break;
 
@@ -451,7 +451,7 @@ public class UI {
 
     }
 
-    public static void departmentMenu(int choice) {
+    public static void departmentMenuUi(int choice) {
         DepartmentManager departmentManager = new DepartmentManager();
         switch (choice) {
 
