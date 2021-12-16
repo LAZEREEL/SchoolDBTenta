@@ -149,12 +149,15 @@ public class CourseManagement {
         TypedQuery<Course> queryA = em.createQuery("SELECT b FROM Course b", Course.class);
 
         Stream<Course> courses = queryA.getResultStream();
-
-        System.out.println("======================================== Courses ========================================");
-        courses.forEach(b -> System.out.println(" Id: " + b.getId() + " " + "Name: " + b.getName() + " "
-                + "Number of Students: " + b.getStudents().size() + " " + "Teacher: " + " " + "id: " +
-                b.getTeacher().getId() + " " + "Name: " + b.getTeacher().getName() + " "));
-
+        try {
+            System.out.println("======================================== Courses ========================================");
+            courses.forEach(b -> System.out.println(" Id: " + b.getId() + " " + "Name: " + b.getName() + " "
+                    + "Number of Students: " + b.getStudents().size() + " " + "Teacher: " + " " + "id: " +
+                    b.getTeacher().getId() + " " + "Name: " + b.getTeacher().getName() + " "));
+        }catch(Exception e) {
+            System.out.println(e);
+            System.out.println("All courses need teachers assigned");
+        }
         em.close();
     }
 
