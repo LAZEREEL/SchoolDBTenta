@@ -1,4 +1,6 @@
-package Entity;
+package management;
+
+import Entity.Course;
 import Entity.Department;
 import javax.persistence.*;
 import java.util.Comparator;

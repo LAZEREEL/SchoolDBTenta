@@ -1,4 +1,4 @@
-import Entity.DepartmentManager;
+import management.DepartmentManager;
 import Entity.Teacher;
 import management.StudentManager;
 import management.CourseManagement;
@@ -438,7 +438,7 @@ public class UI {
     }
 
 
-    public static void departmentMenu() {
+    public static void departmentMenuUi() {
         System.out.println("\n=================================");
         System.out.println("           Department Menu               ");
         System.out.println("=================================");
