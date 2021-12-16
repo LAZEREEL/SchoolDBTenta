@@ -19,6 +19,7 @@ public class UI {
     static boolean teacherMenuLoop = true;
     static boolean departmentMenuLoop = true;
     static boolean statisticsMenuLoop = true;
+    static boolean departmentMenuStatisticLoop = true;
     static boolean courseStatisticsMenuLoop = true;
 
     public static void menuLoop() {
@@ -355,7 +356,6 @@ public class UI {
     }
 
 
-
     public static void teacherMenu(int choice) {
 
         switch (choice) {
@@ -446,8 +446,6 @@ public class UI {
         System.out.println("6.Disconnect Course from Department");
         System.out.println("7.Connect Teacher to Department");
         System.out.println("8.Disconnect Teacher from Department");
-        System.out.println("9. Search");
-
         System.out.println("\n0. Return to the main menu");
         System.out.println("=================================");
 
@@ -480,6 +478,13 @@ public class UI {
             case 6:
                 departmentManager.removeCourseFromDepartment();
 
+            case 7:
+                departmentManager.addTeacherToDepartment();
+                break;
+
+            case 8:
+                departmentManager.removeTeacherToDepartment();
+                break;
 
 
             case 0:
@@ -530,8 +535,11 @@ public class UI {
                 break;
 
             case 4:
-                //departmentStatistics();
+                departmentMenuLoop = true;
+                departmentUiStat();
                 break;
+
+
 
 
             case 0:
@@ -560,7 +568,7 @@ public class UI {
 
     public static void courseStatisticsMenuLoop() {
 
-            courseStatisticsMenuLoop = true;
+        courseStatisticsMenuLoop = true;
 
         while (courseStatisticsMenuLoop) {
             courseStatisticsUi();
@@ -592,4 +600,54 @@ public class UI {
                 break;
         }
     }
+
+
+    public static void depStatUi() {
+
+
+        System.out.println("\n=======================================");
+        System.out.println("           Department Statistics             ");
+        System.out.println("=========================================");
+        System.out.println("1.Display all department");
+        System.out.println("2.Display statistics for specific course");
+
+        System.out.println("\n0.Return to the main menu");
+        System.out.println("=================================");
+
+    }
+
+    public static void departmentUiStat() {
+
+        courseStatisticsMenuLoop = true;
+
+        while (courseStatisticsMenuLoop) {
+            depStatUi();
+
+            System.out.print("\nMake your choice:");
+            int choice = sc.nextInt();
+            sc.nextLine();
+
+            departmentMenuStats(choice);
+        }
+    }
+
+    public static void departmentMenuStats(int choice) {
+        Department department = new Department();
+        DepartmentManager departmentManager = new DepartmentManager();
+        switch (choice) {
+            case 1:
+                System.out.println(department);
+                break;
+
+            case 2:
+                departmentManager.readAllCoursesInThisDepartment();
+                break;
+
+            case 0:
+                departmentMenuStatisticLoop = false;
+                break;
+        }
+    }
+
+
 }

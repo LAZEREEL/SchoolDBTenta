@@ -60,7 +60,15 @@ public class Department extends Course {
         this.teacherList = teacherList;
     }
 
+    public void addTeacher(Teacher teacher) {
+        getTeacherList().add(teacher);
+        teacherList.add(teacher);
+    }
 
+    public void removeTeacher(Teacher teacher) {
+        getCourseList().remove(teacher);
+        teacherList.remove(teacher);
+    }
 
 
 

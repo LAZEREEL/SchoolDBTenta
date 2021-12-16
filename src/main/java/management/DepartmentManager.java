@@ -1,5 +1,6 @@
 package management;
 import Entity.Department;
+import Entity.Teacher;
 import javax.persistence.*;
 import Entity.Course;
 import java.util.Comparator;
@@ -174,4 +175,56 @@ public class DepartmentManager {
         em.getTransaction().commit();
         em.close();
     }
+
+
+
+    public void addTeacherToDepartment() {
+        DepartmentManager depmang = new DepartmentManager();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Department ID");
+        int depId = sc.nextInt();
+        sc.nextLine();
+
+        System.out.println("Course ID");
+        int teacherId = sc.nextInt();
+        sc.nextLine();
+        depmang.addteacher(depId, teacherId);
+    }
+
+    private void addteacher(int depId, int teacherId) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        Teacher teacher = em.find(Teacher.class, teacherId);
+        Department department = em.find(Department.class, depId);
+        department.addTeacher(teacher);
+        em.getTransaction().commit();
+        em.close();
+    }
+
+
+    public void removeTeacherToDepartment() {
+        DepartmentManager depmang = new DepartmentManager();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Department ID");
+        int depId = sc.nextInt();
+        sc.nextLine();
+
+        System.out.println("Course ID");
+        int teacherId = sc.nextInt();
+        sc.nextLine();
+        depmang.removeteacher(depId, teacherId);
+    }
+
+
+
+    private void removeteacher(int depId, int teacherId) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        Teacher teacher = em.find(Teacher.class, teacherId);
+        Department department = em.find(Department.class, depId);
+        department.removeTeacher(teacher);
+        em.getTransaction().commit();
+        em.close();
+    }
+
 }
