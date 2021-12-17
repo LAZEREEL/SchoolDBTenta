@@ -173,13 +173,13 @@ public class CourseManagement {
                 .stream()
                 .collect(Collectors.averagingInt(p -> p.getAge()));
 
-        List<Course> female = em.createQuery("SELECT s FROM Student s WHERE s.gender=:gender").setParameter("gender","female").getResultList();
+        List<Student> female = course.getStudents().stream().filter(s-> s.getGender().equals("woman")).collect(Collectors.toList());
 
         double numberOfFemale = female.size();
         double avgFemaleInCourse = numberOfFemale / numberOfStudents;
 
 
-        List<Course> male = em.createQuery("SELECT s FROM Student s WHERE s.gender=:gender").setParameter("gender","male").getResultList();
+        List<Student> male = course.getStudents().stream().filter(s-> s.getGender().equals("man")).collect(Collectors.toList());
 
         double numberOfMale = male.size();
         double avgMaleInCourse = numberOfMale / numberOfStudents;
