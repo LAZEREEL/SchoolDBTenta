@@ -15,6 +15,9 @@ public class Course {
     @OneToOne
     private Teacher teacher;
 
+    @ManyToOne
+    private Department department;
+
     @ManyToMany(mappedBy = "courses")
     private List<Student> students = new ArrayList<>();
 
@@ -24,6 +27,18 @@ public class Course {
     public Course(String name) {
         Name = name;
 
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public Course(Department department) {
+        this.department = department;
     }
 
     public int getId() {
@@ -42,6 +57,8 @@ public class Course {
         Name = name;
     }
 
+
+
     public Teacher getTeacher() {
         return teacher;
     }
@@ -49,6 +66,8 @@ public class Course {
     public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
     }
+
+
 
     public List<Student> getStudents() {
         return students;

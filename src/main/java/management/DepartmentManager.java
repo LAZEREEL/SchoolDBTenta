@@ -21,9 +21,13 @@ public class DepartmentManager {
         em.getTransaction().begin();
 
         TypedQuery<Department> departmentTypedQuery = em.createQuery("SELECT department FROM Department department", Department.class);
+
         departmentTypedQuery.getResultStream().forEach(System.out::println);
 
         em.close();
+
+
+
     }
 
 

@@ -626,9 +626,9 @@ public class UI {
 
     public static void departmentUiStat() {
 
-        courseStatisticsMenuLoop = true;
+        departmentMenuStatisticLoop = true;
 
-        while (courseStatisticsMenuLoop) {
+        while (departmentMenuStatisticLoop) {
             depStatUi();
 
             System.out.print("\nMake your choice:");

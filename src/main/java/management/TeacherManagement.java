@@ -138,7 +138,7 @@ public class TeacherManagement {
         TypedQuery<Teacher> query = em.createQuery("SELECT t FROM Teacher t", Teacher.class);
 
         List<Teacher> teachers = query.getResultList();
-
+        teachers.size();
         teachers.forEach(t -> System.out.println(" Id=" + t.getId() + ", name=" + t.getName() + ", age="
                 + t.getAge() + " " + t.getDepartment() + ", " + t.getCourse()));
 

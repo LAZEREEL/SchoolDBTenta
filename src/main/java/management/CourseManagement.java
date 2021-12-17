@@ -22,13 +22,18 @@ public class CourseManagement {
 
         Course course = em.find(Course.class, id);
 
-        System.out.println(course);
-        System.out.println("Teacher: " + " " + course.getTeacher());
-        course.getStudents().size(); //To counter a bug that prevents list of Students from being initialized
-        System.out.println("Students: " + course.getStudents());
+        if (course != null) {
 
-        em.getTransaction().commit();
-        em.close();
+            System.out.println(course);
+            System.out.println("Teacher: " + " " + course.getTeacher());
+            course.getStudents().size(); //To counter a bug that prevents list of Students from being initialized
+            System.out.println("Students: " + course.getStudents());
+            System.out.println("Department " + course.getDepartment());
+
+            em.getTransaction().commit();
+        } else{
+            System.out.println("no such course");}
+            em.close();
 
 
     }
@@ -79,6 +84,7 @@ public class CourseManagement {
 
         courseToRemove.setTeacher(null);
         courseToRemove.setStudents(null);
+        courseToRemove.setDepartment(null);
 
         em.remove(courseToRemove);
         em.getTransaction().commit();
@@ -154,7 +160,7 @@ public class CourseManagement {
             courses.forEach(b -> System.out.println(" Id: " + b.getId() + " " + "Name: " + b.getName() + " "
                     + "Number of Students: " + b.getStudents().size() + " " + "Teacher: " + " " + "id: " +
                     b.getTeacher().getId() + " " + "Name: " + b.getTeacher().getName() + " "));
-        }catch(Exception e) {
+        } catch (Exception e) {
             System.out.println(e);
             System.out.println("All courses need teachers assigned");
         }
@@ -173,13 +179,13 @@ public class CourseManagement {
                 .stream()
                 .collect(Collectors.averagingInt(p -> p.getAge()));
 
-        List<Student> female = course.getStudents().stream().filter(s-> s.getGender().equals("woman")).collect(Collectors.toList());
+        List<Student> female = course.getStudents().stream().filter(s -> s.getGender().equals("woman")).collect(Collectors.toList());
 
         double numberOfFemale = female.size();
         double avgFemaleInCourse = numberOfFemale / numberOfStudents;
 
 
-        List<Student> male = course.getStudents().stream().filter(s-> s.getGender().equals("man")).collect(Collectors.toList());
+        List<Student> male = course.getStudents().stream().filter(s -> s.getGender().equals("man")).collect(Collectors.toList());
 
         double numberOfMale = male.size();
         double avgMaleInCourse = numberOfMale / numberOfStudents;
