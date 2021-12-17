@@ -18,18 +18,23 @@ public class DepartmentManager {
     public void printAllDepartment() {
         EntityManager em = emf.createEntityManager();
 
-        em.getTransaction().begin();
+        List<Department> departmentTypedQuery = em.createQuery("SELECT department FROM Department department", Department.class).getResultList();
+        departmentTypedQuery.forEach(e -> e.getCourseList().size());
 
-        TypedQuery<Department> departmentTypedQuery = em.createQuery("SELECT department FROM Department department", Department.class);
+        departmentTypedQuery.forEach(System.out::println);
 
-        departmentTypedQuery.getResultStream().forEach(System.out::println);
+        em.close();
+    }
+    public List<Department> getAllDepartments() {
+        EntityManager em = emf.createEntityManager();
+
+        List<Department> departments = em.createQuery("SELECT department FROM Department department", Department.class).getResultList();
+
 
         em.close();
 
-
-
+        return departments;
     }
-
 
     public void createDepartment() { // 2
         EntityManager em = emf.createEntityManager();
@@ -215,7 +220,7 @@ public class DepartmentManager {
         try {
             Department courseInDepartment = departmentTypedQuery.getSingleResult();
             courseInDepartment.getCourseList();
-            System.out.println(courseInDepartment.getCourseList().size() + " belongs to" + courseInDepartment);
+            System.out.println(courseInDepartment.getCourseList().size() + " courses belongs to" + courseInDepartment);
 
         } catch (NoResultException nre) {
             System.out.println("No department found: " + nre);

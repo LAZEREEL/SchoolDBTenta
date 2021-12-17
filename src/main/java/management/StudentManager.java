@@ -265,7 +265,11 @@ public class StudentManager {
 
         double percentOfMen = (double) 100 * numberOfMen/numberOfStudents;
 
-        System.out.println("The gender distrubtion is " + percentOfWomen + "% of women and " + percentOfMen + "% of men");
+
+
+
+        System.out.println("The gender distrubtion is " + String.format("%.2f", percentOfWomen) + "% of women and " + String.format("%.2f", percentOfMen) + "% of men");
+
 
         em.close();
 

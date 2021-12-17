@@ -78,12 +78,16 @@ public class CourseManagement {
     public static void removeCourse(int id) {
         EntityManager em = emf.createEntityManager();
 
+        DepartmentManager departmentManager = new DepartmentManager();
+
         Course courseToRemove = em.find(Course.class, id);
 
         em.getTransaction().begin();
 
+        departmentManager.getAllDepartments().forEach(d -> d.removeCourse(courseToRemove));
+
         courseToRemove.setTeacher(null);
-        courseToRemove.setStudents(null);
+        courseToRemove.getStudents().forEach(s -> s = null);
         courseToRemove.setDepartment(null);
 
         em.remove(courseToRemove);

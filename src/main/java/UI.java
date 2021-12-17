@@ -644,7 +644,7 @@ public class UI {
         DepartmentManager departmentManager = new DepartmentManager();
         switch (choice) {
             case 1:
-                System.out.println(department);
+                departmentManager.printAllDepartment();
                 break;
 
             case 2:
